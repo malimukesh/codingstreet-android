@@ -56,6 +56,15 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        if (webView.canGoBack()) {
+            webView.goBack();
+        } else {
+            super.onBackPressed();
+        }
+    }
+
     public  boolean isNetConnected(Context context) {
         if (context != null) {
             final ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context
