@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         android:layout_weight="20"
         ads:adSize="BANNER"
-        ads:adUnitId="">
+        ads:adUnitId="<your-admob-key>">
     </com.google.android.gms.ads.AdView>
 
 </LinearLayout>
