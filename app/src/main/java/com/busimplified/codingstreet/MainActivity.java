@@ -14,6 +14,7 @@ import android.webkit.WebViewClient;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         webView.clearCache(true);
         mAdView = (AdView) findViewById(R.id.adView);
         if (isConnected) {
+            MobileAds.initialize(getApplicationContext(), "ca-app-pub-2376950998506083~1750153856");
             webView.loadUrl("file:///android_asset/connecting_website.html");
             webView.loadUrl(String.valueOf(Uri.parse("http://codingstreet.com")));
 

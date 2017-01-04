@@ -26,7 +26,7 @@
         android:layout_height="0dp"
         android:layout_weight="20"
         ads:adSize="BANNER"
-        ads:adUnitId="testkey">
+        ads:adUnitId="ca-app-pub-2376950998506083/3226887051">
     </com.google.android.gms.ads.AdView>
 
 </LinearLayout>
