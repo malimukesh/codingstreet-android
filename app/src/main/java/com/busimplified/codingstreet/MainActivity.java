@@ -7,10 +7,12 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ProgressBar;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AdView mAdView;
     private WebView webView;
+    private ProgressBar mProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,18 +32,21 @@ public class MainActivity extends AppCompatActivity {
         webView = (WebView) findViewById(R.id.webView);
         webView.clearCache(true);
         mAdView = (AdView) findViewById(R.id.adView);
+        mProgressView = (ProgressBar) findViewById(R.id.progressBar);
         if (isConnected) {
             MobileAds.initialize(getApplicationContext(), "ca-app-pub-2376950998506083~1750153856");
-            webView.loadUrl("file:///android_asset/connecting_website.html");
             webView.loadUrl(String.valueOf(Uri.parse("http://codingstreet.com")));
 
             AdRequest adRequest = new AdRequest.Builder().build();
+
             if (adRequest != null) {
                 mAdView.loadAd(adRequest);
             }
 
         } else {
             webView.loadUrl("file:///android_asset/connect_internet.html");
+            webView.setVisibility(View.VISIBLE);
+            mProgressView.setVisibility(View.GONE);
         }
 
         WebSettings webSettings = webView.getSettings();
@@ -53,6 +59,13 @@ public class MainActivity extends AppCompatActivity {
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return false;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                webView.setVisibility(View.VISIBLE);
+                mProgressView.setVisibility(View.GONE);
             }
         });
 
